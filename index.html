@@ -22,6 +22,7 @@ body{
     background:#666;
     display:flex;
     align-items:center;
+    flex-wrap:wrap;
 }
 
 .navbar a{
@@ -61,24 +62,24 @@ body{
 
 /* PAGE CONTENT */
 .container{
-    padding:10px;
+    padding:15px;
 }
 
 .section-title{
     font-size:24px;
     font-weight:bold;
-    margin-bottom:12px;
+    margin-bottom:15px;
     color:black;
 }
 
 .mods-grid{
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
-    gap:40px;
-    margin-bottom:20px;
+    gap:25px;
+    margin-bottom:30px;
 }
 
-/* MOD CARDS */
+/* MOD CARD */
 .mod-card{
     width:130px;
     height:100px;
@@ -103,16 +104,6 @@ body{
     transform:scale(1.05);
 }
 
-.mod-card a{
-    color:white;
-    text-decoration:none;
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
 /* MODAL */
 .modal{
     display:none;
@@ -122,16 +113,18 @@ body{
     width:100%;
     height:100%;
     background:rgba(0,0,0,.5);
+    z-index:1000;
 }
 
 .modal-content{
     background:white;
     width:450px;
     max-width:90%;
-    margin:100px auto;
-    padding:20px;
+    margin:120px auto;
+    padding:25px;
     border-radius:12px;
     box-shadow:0 0 20px rgba(0,0,0,.3);
+    text-align:center;
 }
 
 .close{
@@ -140,32 +133,26 @@ body{
     cursor:pointer;
 }
 
-.modal h2{
-    margin-bottom:15px;
-}
-
-.modal input,
-.modal textarea{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border:1px solid #ccc;
-    border-radius:6px;
-}
-
-.modal button[type="submit"]{
-    width:100%;
-    padding:12px;
-    background:#8f14d9;
+.discord-link{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#5865F2;
     color:white;
-    border:none;
-    border-radius:6px;
-    font-size:16px;
-    cursor:pointer;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.3s;
 }
 
-.modal button[type="submit"]:hover{
-    background:#a63cf0;
+.discord-link:hover{
+    background:#4752c4;
+}
+
+.empty-message{
+    color:#666;
+    font-style:italic;
+    padding:20px 0;
 }
 </style>
 </head>
@@ -188,8 +175,7 @@ body{
         shortcut to google
     </a>
 
-    <button class="submit-btn"
-            onclick="openSubmitModal()">
+    <button class="submit-btn" onclick="openSubmitModal()">
         Submit Mod
     </button>
 </nav>
@@ -198,28 +184,18 @@ body{
 
     <h2 class="section-title">latest mods</h2>
 
-    <div class="mods-grid" id="latestMods">
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
+    <div class="mods-grid" id="latestMods"></div>
+
+    <div class="empty-message">
+        No mods have been posted yet.
     </div>
 
     <h2 class="section-title">featured mods</h2>
 
-    <div class="mods-grid">
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
-        <div class="mod-card">mod blank</div>
+    <div class="mods-grid"></div>
+
+    <div class="empty-message">
+        No featured mods yet.
     </div>
 
 </div>
@@ -228,131 +204,41 @@ body{
 <div id="submitModal" class="modal">
     <div class="modal-content">
 
-        <span class="close"
-              onclick="closeSubmitModal()">
-              &times;
+        <span class="close" onclick="closeSubmitModal()">
+            &times;
         </span>
 
         <h2>Submit a Mod</h2>
 
-        <form id="modForm">
+        <p style="margin-top:15px; line-height:1.6;">
+            To submit a mod, please join our Discord server and post your submission there.
+        </p>
 
-            <input
-                id="modName"
-                type="text"
-                placeholder="Mod Name"
-                required>
-
-            <textarea
-                id="modDescription"
-                rows="5"
-                placeholder="Description"
-                required></textarea>
-
-            <input
-                id="modLink"
-                type="url"
-                placeholder="Download Link">
-
-            <button type="submit">
-                Submit
-            </button>
-
-        </form>
+        <a class="discord-link"
+           href="https://discord.gg/Et9W6VNjfb"
+           target="_blank">
+           Join the Discord Server
+        </a>
 
     </div>
 </div>
 
 <script>
-function openSubmitModal(){
+function openSubmitModal() {
     document.getElementById("submitModal").style.display = "block";
 }
 
-function closeSubmitModal(){
+function closeSubmitModal() {
     document.getElementById("submitModal").style.display = "none";
 }
 
-window.onclick = function(event){
+window.onclick = function(event) {
     const modal = document.getElementById("submitModal");
 
-    if(event.target === modal){
+    if (event.target === modal) {
         modal.style.display = "none";
     }
-};
-
-function createModCard(mod){
-
-    const card = document.createElement("div");
-    card.className = "mod-card";
-    card.title = mod.description;
-
-    if(mod.link && mod.link.trim() !== ""){
-
-        const link = document.createElement("a");
-        link.href = mod.link;
-        link.target = "_blank";
-        link.textContent = mod.name;
-
-        card.appendChild(link);
-
-    }else{
-
-        card.textContent = mod.name;
-
-    }
-
-    return card;
 }
-
-function loadMods(){
-
-    const savedMods =
-        JSON.parse(localStorage.getItem("mods")) || [];
-
-    const latestMods =
-        document.getElementById("latestMods");
-
-    savedMods.forEach(mod => {
-        latestMods.prepend(
-            createModCard(mod)
-        );
-    });
-}
-
-document
-.getElementById("modForm")
-.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    const mod = {
-        name: document.getElementById("modName").value,
-        description: document.getElementById("modDescription").value,
-        link: document.getElementById("modLink").value
-    };
-
-    const mods =
-        JSON.parse(localStorage.getItem("mods")) || [];
-
-    mods.unshift(mod);
-
-    localStorage.setItem(
-        "mods",
-        JSON.stringify(mods)
-    );
-
-    document
-        .getElementById("latestMods")
-        .prepend(createModCard(mod));
-
-    alert("Mod submitted successfully!");
-
-    closeSubmitModal();
-
-    this.reset();
-});
-
-loadMods();
 </script>
 
 </body>
