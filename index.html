@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ModHub</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#e9e9e9;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#666;
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    padding:16px 20px;
+    font-weight:bold;
+    border-right:1px solid rgba(255,255,255,0.15);
+    transition:.3s;
+}
+
+.navbar a:hover{
+    background:#777;
+}
+
+.navbar a.active{
+    background:#7b7b7b;
+}
+
+/* HIDE SUBMIT MOD BUTTON */
+.submit-btn{
+    position:absolute;
+    left:-9999px;
+    top:-9999px;
+}
+
+/* PAGE CONTENT */
+.container{
+    padding:15px;
+}
+
+.section-title{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:15px;
+    color:black;
+}
+
+/* MOD GRID */
+.mods-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+    margin-bottom:30px;
+}
+
+/* CLICKABLE MOD BUTTON */
+.mod-card{
+    width:130px;
+    height:100px;
+    background:linear-gradient(to right,#8f14d9,#d7b0f0);
+    border:2px solid #9a49d8;
+    border-radius:14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+    text-align:center;
+
+    cursor:pointer;
+
+    box-shadow:0 2px 5px rgba(0,0,0,.2);
+    transition:.2s;
+
+    overflow:hidden;
+    padding:10px;
+}
+
+.mod-card:hover{
+    transform:scale(1.05);
+    background:linear-gradient(to right,#a63cf0,#e0c4f5);
+}
+
+/* EMPTY MESSAGE */
+.empty-message{
+    color:#666;
+    font-style:italic;
+    padding:20px 0;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="index.html" target="_blank">
+        modhub
+    </a>
+
+    <a href="index.html" class="active" target="_blank">
+        home
+    </a>
+
+    <a href="trending.html" target="_blank">
+        trending
+    </a>
+
+    <a href="mod-of-the-week.html" target="_blank">
+        mod of the week
+    </a>
+
+    <a href="search.html" target="_blank">
+        search
+    </a>
+
+    <a href="https://google.com" target="_blank" rel="noopener noreferrer">
+        shortcut to google
+    </a>
+
+    <!-- Hidden -->
+    <button class="submit-btn">
+        Submit Mod
+    </button>
+
+</nav>
+
+
+<div class="container">
+
+    <!-- LATEST MODS -->
+    <h2 class="section-title">
+        latest mods
+    </h2>
+
+    <div class="mods-grid">
+
+        <!-- MOD BUTTON 1 -->
+        <a class="mod-card"
+           href="https://example.com/mod1"
+           target="_blank"
+           rel="noopener noreferrer">
+            Mod 1
+        </a>
+
+        <!-- MOD BUTTON 2 -->
+        <a class="mod-card"
+           href="https://example.com/mod2"
+           target="_blank"
+           rel="noopener noreferrer">
+            Mod 2
+        </a>
+
+        <!-- MOD BUTTON 3 -->
+        <a class="mod-card"
+           href="https://example.com/mod3"
+           target="_blank"
+           rel="noopener noreferrer">
+            Mod 3
+        </a>
+
+    </div>
+
+
+    <!-- FEATURED MODS -->
+    <h2 class="section-title">
+        featured mods
+    </h2>
+
+    <div class="mods-grid">
+
+        <!-- FEATURED MOD 1 -->
+        <a class="mod-card"
+           href="https://example.com/featured1"
+           target="_blank"
+           rel="noopener noreferrer">
+            Featured Mod
+        </a>
+
+        <!-- FEATURED MOD 2 -->
+        <a class="mod-card"
+           href="https://example.com/featured2"
+           target="_blank"
+           rel="noopener noreferrer">
+            Featured Mod 2
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
